@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<div id="container">
+    <div id="titleDateContainer">
+        <button (click)="removeForm()" title="Remove this Task">
+            <mat-icon aria-hidden="false" aria-label="Remove this Task">highlight_off</mat-icon>
+        </button>
+        <div (click)="expandForm()" title="Expand to show details">
+            {{formData}}
+            <p>{{formData.name}}</p>
+            <p>{{formData.createdOn | date}}</p>
+        </div>
+
+        <div>
+            <button title="Mark Task as 'In Progress'">
+                <mat-icon aria-hidden="false" aria-label="Mark Task as 'In Progress'">cached</mat-icon>
+            </button>
+        </div>
+    </div>
+    <p *ngIf="expandedIndex == formIndex" id="description">
+        {{formData.description}}</p>
+</div>

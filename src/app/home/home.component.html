@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<div id="navbar">
+  <span></span>
+
+  <div>
+    <button routerLink="login" *ngIf="!userService.isLoggedIn()">Log in</button>
+    <button routerLink="signup" *ngIf="!userService.isLoggedIn()">Sign up</button>
+    <button *ngIf="userService.isLoggedIn()" (click)="userService.logoutUser()">Logout</button>
+  </div>
+</div>
+
+<div id="container">
+  <h1>Dashboard</h1>
+
+  <div id="overlay" *ngIf="showMore"></div>
+
+  <div id="newTaskFields" [ngClass]="{'newTaskFieldsAbsolute': showMore}">
+    <div id="titleBox">
+      <h2>Application</h2>
+      <div>
+        <button routerLink="register" *ngIf="userService.isLoggedIn()">Add Form</button>
+        <button (click)="exportcsv()" *ngIf="userService.isLoggedIn()">Export CSV</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="todoListContainer">
+    <div *ngFor="let formData of formService.formList; let i = index">
+
+      <div id="container">
+        <div id="titleDateContainer">
+          <button (click)="removeForm(i)" title="Remove this Task">
+            <mat-icon aria-hidden="false" aria-label="Remove this Task">highlight_off</mat-icon>
+          </button>
+          <div (click)="expandForm()" title="Expand to show details">
+            <p>{{formData.name}}</p>
+            <p>{{formData.createdOn | date}}</p>
+          </div>
+          <div>
+            <button (click)="downloadPdf(formData)">Download PDF</button>
+          </div>
+        </div>
+        <p *ngIf="expandedIndex == formIndex" id="description">
+          {{formData.description}}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="todoService.todoList.length == 0" id="emptyListPlaceholder">
+    <img src="./../../assets/empty.svg">
+
+    <p>No Application Submitted</p>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

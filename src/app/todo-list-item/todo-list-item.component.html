@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<div id="container">
+    <div id="titleDateContainer">
+        <button (click)="removeToDo()" title="Remove this Task">
+            <mat-icon aria-hidden="false" aria-label="Remove this Task">highlight_off</mat-icon>
+        </button>
+
+        <div (click)="expandToDo()" title="Expand to show details">
+            <p [ngClass]="{'doneToDoTitle': todoData.status === 'done'}">
+                {{todoData.title}}</p>
+            <p [ngClass]="{'doneToDoTitle': todoData.status === 'done'}">
+                {{todoData.createdOn | date}}</p>
+        </div>
+
+        <div>
+            <button (click)="changeStatus('doing')" [ngClass]="{'selectedStatus': todoData.status === 'doing'}"
+                title="Mark Task as 'In Progress'">
+                <mat-icon aria-hidden="false" aria-label="Mark Task as 'In Progress'">cached</mat-icon>
+            </button>
+            <button (click)="changeStatus('done')" [ngClass]="{'selectedStatus': todoData.status === 'done'}"
+                title="Mark Task as 'Done'">
+                <mat-icon aria-hidden="false" aria-label="Mark Task as 'Done'">check_circle_outline</mat-icon>
+            </button>
+        </div>
+
+    </div>
+
+    <p *ngIf="expandedIndex == todoIndex" id="description" [ngClass]="{'doneToDoTitle': todoData.status === 'done'}">
+        {{todoData.description}}</p>
+</div>

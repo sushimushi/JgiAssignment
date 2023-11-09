@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<div id="tabButtons" *ngIf="thisRoute != '/register'">
+    <button [ngClass]="{'selectedTab': thisRoute == '/login'}" (click)="switchTo('/login')">Log in</button>
+    <button [ngClass]="{'selectedTab': thisRoute == '/signup'}" (click)="switchTo('/signup')">Sign up</button>
+</div>
+<h2 class="registerTitle" *ngIf="thisRoute == '/register'">Register</h2>
+
+<form #signupLoginForm="ngForm">
+    <div class="loginSignupContainer">
+        <input type="email" class="field" name="email" [(ngModel)]="email" placeholder="Email" required
+            title="Enter your Email" />
+
+        <input type="text" class="field" name="name" [(ngModel)]="name" placeholder="Name" required
+            title="Enter your Name" *ngIf="thisRoute == '/signup' || thisRoute == '/register'" />
+
+        <input type="text" class="field" name="mobile" [(ngModel)]="mobile" placeholder="Mobile" required
+            title="Enter phone number" *ngIf="thisRoute == '/register'" />
+
+        <input type="text" class="field" name="gender" [(ngModel)]="gender" placeholder="Gender" required
+            title="Select gender" *ngIf="thisRoute == '/register'" />
+
+        <input type="text" class="field" name="applicationAmount" [(ngModel)]="applicationAmount" placeholder="Application Amount" required
+            title="Select applicationAmount" *ngIf="thisRoute == '/register'" />
+
+        <input type="text" class="field" name="profileImg" [(ngModel)]="profileImg" placeholder="Profile Image" required
+            title="Select Image" *ngIf="thisRoute == '/register'" />
+
+        <div class="passwordContainer" *ngIf="thisRoute != '/register'">
+            <input type="{{showingPassword? 'text' : 'password'}}" class="field passwordField" name="password"
+                [(ngModel)]="password" placeholder="Password" minlength="8" required title="Enter a strong Password" />
+            <button (click)="toggleShowPassword()">
+                <mat-icon aria-hidden="false" aria-label="Collapse New Task Fields">
+                    {{showingPassword? 'visibility_off_outline' : 'visibility_outline'}}
+                </mat-icon>
+            </button>
+        </div>
+
+        <div class="passwordContainer" *ngIf="thisRoute == '/signup'">
+            <input type="{{showingPassword? 'text' : 'password'}}" class="field passwordField" name="confirmPassword"
+                [(ngModel)]="confirmPassword" placeholder="Confirm Password" required title="Re-enter Password" />
+            <button (click)="toggleShowPassword()">
+                <mat-icon aria-hidden="false" aria-label="Collapse New Task Fields">
+                    {{showingPassword? 'visibility_off_outline' : 'visibility_outline'}}
+                </mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div id="actionButtons">
+        <button (click)="loginSignup()" *ngIf="thisRoute != '/register'">{{thisRoute == '/login'? 'Log in' : 'Sign
+            up'}}</button>
+        <button (click)="test()" *ngIf="thisRoute == '/register'">Submit</button>
+        <button (click)="closeDialog()">Cancel</button>
+    </div>
+</form>
+
+<div id="spinnerContainer" *ngIf="isLoading" @overlayTrigger>
+    <mat-spinner [diameter]='50'></mat-spinner>
+</div>

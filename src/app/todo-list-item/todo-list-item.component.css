@@ -1,0 +1,97 @@
+#container {
+    text-align: start;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background: #19242b;
+    box-shadow: 0px 2px 2px 0px #050505;
+}
+
+#titleDateContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+#titleDateContainer div:nth-of-type(1) {
+    flex: 4;
+    margin-left: 10px;
+}
+
+#titleDateContainer div:nth-of-type(2) {
+    flex: 1;
+    margin-left: 10px;
+    display: flex;
+}
+
+#titleDateContainer button:nth-of-type(1) {
+    margin-right: 10px;
+}
+
+/* Title */
+#titleDateContainer p:nth-child(1) {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 5px 0px;
+    opacity: 0.8;
+}
+
+/* Date */
+#titleDateContainer p:nth-child(2) {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 100;
+    opacity: 0.5;
+    margin: 0px;
+}
+
+/* Description */
+div #description {
+    font-size: 15px;
+    font-weight: 100;
+    margin: 10px 0px 0px;
+    border-top: 2px solid #131b20;
+    padding: 10px 10px 0px 10px;
+    opacity: 0.8;
+}
+
+.doneToDoTitle {
+    text-decoration-line: line-through;
+    font-style: italic;
+}
+
+.selectedStatus {
+    background: #2196F3;
+}
+
+button {
+    padding: 8px;
+    border: none;
+    border-radius: 100px;
+    font-size: 15px;
+    width: 100%;
+    background: #131b20;
+    color: whitesmoke;
+    font-weight: 400;
+    width: fit-content;
+    height: fit-content;
+}
+
+button .mat-icon {
+    vertical-align: middle;
+}
+
+input, textarea {
+    color: whitesmoke;
+    background: transparent;
+}
+
+input::placeholder, textarea::placeholder {
+    color: whitesmoke;
+    opacity: 0.2;
+}
+
+button, textarea, input:focus {
+    outline: 0px;
+}
