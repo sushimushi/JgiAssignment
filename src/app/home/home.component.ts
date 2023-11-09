@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { FormService } from '../services/form.service';
 import { UserService } from '../services/user.service';
+import { DataService } from '../data.service';
 import { PDFDocument, rgb } from 'pdf-lib';
+import { Router } from '@angular/router';
 
 import {
   FormGroup,
@@ -12,6 +14,7 @@ import {
   Validator,
   Validators,
 } from '@angular/forms';
+import { Form } from '../models/form.model';
 
 @Component({
   selector: 'app-home',
@@ -41,8 +44,16 @@ export class HomeComponent implements OnInit {
   constructor(
     public todoService: TodoService,
     public formService: FormService,
-    public userService: UserService
+    public userService: UserService,
+    private dataService: DataService,
+    private router: Router
   ) {}
+
+  edit(data: Form){
+    this.dataService.sharedData = {data};
+    this.dataService.isEdit = true;
+    this.router.navigate(['/register']);
+  }
 
   removeForm(index: number) {
     this.formService.removeForm(this.userService.isLoggedIn(), index);

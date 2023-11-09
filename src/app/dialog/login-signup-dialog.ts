@@ -1,8 +1,9 @@
-import { Component, Inject, Injectable } from '@angular/core';
+import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { DataService } from '../data.service';
 
 import { UserService } from '../services/user.service';
 import { User } from '../models/user.model';
@@ -49,13 +50,14 @@ export class DialogEntryComponent {
     ]),
   ],
 })
-export class DialogOverviewDialog {
+export class DialogOverviewDialog implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewDialog>,
     private router: Router,
     private location: Location,
     public userService: UserService,
-    public formServices: FormService
+    public formServices: FormService,
+    public dataService: DataService
   ) {}
 
   thisRoute = this.router.url;
@@ -70,6 +72,23 @@ export class DialogOverviewDialog {
   isLoading = false;
 
   showingPassword = false;
+
+  sharedData: any = {};
+  isEdit = false;
+
+  ngOnInit() {
+    console.log(this.dataService.isEdit);
+    this.isEdit = this.dataService.isEdit;
+    if (this.isEdit) {
+    this.email = this.dataService.sharedData.data.email;
+    this.name = this.dataService.sharedData.data.name;
+    this.mobile = this.dataService.sharedData.data.mobile;
+    this.applicationAmount = this.dataService.sharedData.data.applicationAmount;
+    this.profileImg = this.dataService.sharedData.data.profileImg;
+    }
+    console.log('init', this.name, this.dataService.sharedData);
+  }
+
   toggleShowPassword() {
     this.showingPassword = this.showingPassword ? false : true;
   }
